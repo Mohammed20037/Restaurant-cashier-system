@@ -1,4 +1,4 @@
-# Professional Restaurant Cashier System - README
+# Professional Restaurant Cashier System
 
 ![image](https://github.com/Mohammed20037/Restaurant-cashier-system/assets/113844625/0861b398-2998-42b0-a4f3-9f80dd74f4cc)
 
