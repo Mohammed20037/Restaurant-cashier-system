@@ -1,0 +1,378 @@
+CREATE DATABASE restaurant_inventory;
+
+USE restaurant_inventory;
+
+CREATE TABLE ingredients (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  quantity INT NOT NULL,
+  unit VARCHAR(50) NOT NULL,
+  date_added DATE NOT NULL
+);
+
+CREATE TABLE dishes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  price DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE recipe (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  dish_id INT NOT NULL,
+  ingredient_id INT NOT NULL,
+  quantity INT NOT NULL,
+  FOREIGN KEY (dish_id) REFERENCES dishes(id),
+  FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+);
+
+-- Insert some sample dishes
+INSERT INTO dishes (name, description, price)
+VALUES
+('Grilled Salmon', 'Grilled salmon fillet with a side of roasted vegetables', 16.99),
+('Steak Frites', 'Grilled sirloin steak served with French fries and a coleslaw mix', 18.99),
+('Butter Chicken', 'A creamy Indian curry dish with chicken', 14.99),
+('Beef Stroganoff', 'A Russian dish made with tender beef strips and BBQ sauce', 15.99),
+('Chicken and Chips', 'chicken thiges ,  fries and BBQ sauce', 12.99),
+('Mushroom Risotto', 'Creamy potatoes cooked with mushrooms and parmesan cheese', 13.99),
+('Pork Chops', 'Grilled pork chops served with a side of mashed potatoes and green beans', 16.99),
+('Sushi Platter', 'A selection of fresh sushi rolls and sushi rice', 22.99),
+('Taco Salad', 'A salad with seasoned beef, corn, and avocado', 11.99),
+('Pad Thai', 'A popular Thai noodle dish with shrimp and tofu', 13.99),
+('Roast Beef', 'Tender roast beef served with roasted potatoes and carrots', 17.99),
+('Chicken Shawarma', 'A Middle Eastern wrap filled with seasoned chicken and french fries', 9.99),
+('Fettuccine Alfredo', 'Creamy pasta with parmesan cheese ', 12.99),
+('BBQ Ribs', 'Slow-cooked BBQ ribs with a side of coleslaw and corn', 19.99),
+('Beef Tacos', 'Soft-shell tacos with seasoned ground beef, lettuce, and cheese', 8.99),
+('Goulash', 'A Hungarian stew with beef, potatoes, and paprika', 14.99),
+('Chicken Parmesan', 'Breaded chicken breast with tomato sauce and mozzarella cheese', 15.99),
+('Miso Soup', 'A Japanese soup with miso paste, tofu, and seaweed', 4.99);
+INSERT INTO ingredients (name, quantity, unit, date_added)
+VALUES
+('Salmon', 10, 'lbs', '2022-04-01'),
+('Asparagus', 20, 'bunches', '2022-04-01'),
+('Green Beans', 25, 'lbs', '2022-04-01'),
+('Sirloin Steak', 15, 'lbs', '2022-04-01'),
+('French Fries', 30, 'lbs', '2022-04-01'),
+('Lettuce', 10, 'heads', '2022-04-01'),
+('Beef', 20, 'lbs', '2022-04-01'),
+('Sushi Rice', 40, 'lbs', '2022-04-01'),
+('Avocado', 30, 'each', '2022-04-01'),
+('Corn', 25, 'cobs', '2022-04-01'),
+('Rice Noodles', 30, 'lbs', '2022-04-01'),
+('Chicken Breast', 30, 'lbs', '2022-04-01'),
+('Pasta', 40, 'lbs', '2022-04-01'),
+('Pork Chops', 20, 'lbs', '2022-04-01'),
+('Beef Broth', 20, 'quarts', '2022-04-01'),
+('Lettuce Mix', 15, 'lbs', '2022-04-01'),
+('Ground Beef', 30, 'lbs', '2022-04-01'),
+('Miso Paste', 5, 'lbs', '2022-04-01'),
+('Tofu', 15, 'lbs', '2022-04-01'),
+('Seaweed', 10, 'lbs', '2022-04-01'),
+('Ribs', 10, 'lbs', '2022-04-01'),
+('Tomato Sauce', 10, 'quarts', '2022-04-01'),
+('Mozzarella Cheese', 30, 'lbs', '2022-04-01'),
+('Meat Sauce', 20, 'quarts', '2022-04-01'),
+('Parmesan Cheese', 15, 'lbs', '2022-04-01'),
+('BBQ Sauce', 10, 'quarts', '2022-04-01'),
+('Coleslaw Mix', 10, 'lbs', '2022-04-01'),
+('Potatoes', 25, 'lbs', '2022-04-01'),
+('Carrots', 20, 'lbs', '2022-04-01'),
+('Cheese', 20, 'lbs', '2022-04-01'),
+('Shrimps', 25, 'lbs', '2022-04-01'),
+('Butter Sauce', 25, 'lbs', '2022-04-01')
+,('Mushrooms', 5, 'lbs', '2022-04-01');
+
+-- Insert recipe values for Grilled Salmon
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Salmon'
+WHERE d.name = 'Grilled Salmon';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Potatoes'
+WHERE d.name = 'Grilled Salmon';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Carrots'
+WHERE d.name = 'Grilled Salmon';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Asparagus'
+WHERE d.name = 'Grilled Salmon';
+
+
+-- Insert recipe values for Steak Frites
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Sirloin Steak'
+WHERE d.name = 'Steak Frites';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'French Fries'
+WHERE d.name = 'Steak Frites';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Coleslaw Mix'
+WHERE d.name = 'Steak Frites';
+
+-- Insert recipe values for Butter Chicken
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Chicken Breast'
+WHERE d.name = 'Butter Chicken';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Butter Sauce'
+WHERE d.name = 'Butter Chicken';
+
+-- Insert recipe values for Beef Stroganoff
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Beef'
+WHERE d.name = 'Beef Stroganoff';
+-- Chicken AND CHIPS
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'BBQ Sauce'
+WHERE d.name = 'Chicken and Chips';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Chicken Thighs'
+WHERE d.name = 'Chicken and Chips';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'French Fries'
+WHERE d.name = 'Chicken and Chips';
+
+-- Mushroom Risotto
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Potatoes'
+WHERE d.name = 'Mushroom Risotto';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Parmesan Cheese'
+WHERE d.name = 'Mushroom Risotto';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Mushrooms'
+WHERE d.name = 'Mushroom Risotto';
+
+-- Pork Chops
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Pork Chops'
+WHERE d.name = 'Pork Chops';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Green Beans'
+WHERE d.name = 'Pork Chops';
+-- Sushi Platter
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Sushi Rice'
+WHERE d.name = 'Sushi Platter';
+
+
+-- Taco Salad
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Ground Beef'
+WHERE d.name = 'Taco Salad';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Corn'
+WHERE d.name = 'Taco Salad';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Avocado'
+WHERE d.name = 'Taco Salad';
+
+-- Pad Thai
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Tofu'
+WHERE d.name = 'Pad Thai';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Shrimps'
+WHERE d.name = 'Pad Thai';
+
+-- roast beef
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Beef'
+WHERE d.name = 'Roast Beef';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Carrots'
+WHERE d.name = 'Roast Beef';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Potatoes'
+WHERE d.name = 'Roast Beef';
+
+-- Chicken Shawarma
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Chicken Breast'
+WHERE d.name = 'Chicken Shawarma';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'French Fries'
+WHERE d.name = 'Chicken Shawarma';
+
+-- Fettuccine Alfredo
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Pasta'
+WHERE d.name = 'Fettuccine Alfredo';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Parmesan Cheese'
+WHERE d.name = 'Fettuccine Alfredo';
+
+-- BBQ Ribs
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Ribs'
+WHERE d.name = 'BBQ Ribs';
+
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Coleslaw Mix'
+WHERE d.name = 'BBQ Ribs';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Corn'
+WHERE d.name = 'BBQ Ribs';
+
+-- Beef Tacos
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Ground Beef'
+WHERE d.name = 'Beef Tacos';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Lettuce Mix'
+WHERE d.name = 'Beef Tacos';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Cheese'
+WHERE d.name = 'Beef Tacos';
+
+-- goulash
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Beef'
+WHERE d.name = 'Goulash';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Potatoes'
+WHERE d.name = 'Goulash';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Paprika'
+WHERE d.name = 'Goulash';
+
+-- Chicken Parmesan 
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Chicken Breast'
+WHERE d.name = 'Chicken Parmesan';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Mozzarella Cheese'
+WHERE d.name = 'Chicken Parmesan';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Tomato Sauce'
+WHERE d.name = 'Chicken Parmesan';
+
+-- Miso Soup
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Miso Paste'
+WHERE d.name = 'Miso Soup';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Tofu'
+WHERE d.name = 'Miso Soup';
+INSERT INTO recipe (dish_id, ingredient_id, quantity)
+SELECT d.id, i.id, 20
+FROM dishes d
+JOIN ingredients i ON i.name = 'Seaweed'
+WHERE d.name = 'Miso Soup';
+
+-- Show the recipe table with dish and ingredient names
+SELECT d.name AS dish_name, i.name AS ingredient_name, r.quantity
+FROM recipe r
+JOIN dishes d ON r.dish_id = d.id
+JOIN ingredients i ON r.ingredient_id = i.id;
+CREATE TABLE orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  dish_id INT NOT NULL,
+  price DECIMAL(10, 2) NOT NULL,
+  date_ordered DATE NOT NULL,
+  FOREIGN KEY (dish_id) REFERENCES dishes(id)
+);
+
+SELECT o.id, d.name AS dish_name, o.price, o.date_ordered
+FROM orders o
+JOIN dishes d ON o.dish_id = d.id;
